@@ -18,12 +18,12 @@ if (!process.env.EXPOSE_URL) {
   return;
 };
 
-
 const bot = new ViberBot({
     authToken: process.env.BOT_TOKEN,
-    name: 'РЕУ-8 БОТ',
+    name: 'РЕУ-8 БОТ НОВЫЙ',
     avatar: process.env.BOT_LOGO    
 });
+
 
 bot.on(BotEvents.CONVERSATION_STARTED, (response) => {
     response.send(new KeyboardMessage({"Type": "keyboard",
@@ -86,7 +86,6 @@ bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
 
     else if (text.toLowerCase() === 'телефон') {
 
-
         const keyboardPhone = {
             "Type": "keyboard",
             "Buttons": [phoneNumberButton]
@@ -102,7 +101,6 @@ bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
             }
         };
         sendButton();
-
     }
 
     else {
