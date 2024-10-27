@@ -44,7 +44,7 @@ app.listen(port, () => {
 
     // Устанавливаем вебхуки после того, как сервер запущен и прослушивает порт
 
-    const webhookUrl = 'https://viberbot2024-d1dafab31500.herokuapp.com/';
+    const webhookUrl = 'hhttps://bottest2024-6ece1e1468ad.herokuapp.com/';
 
     // const webhookUrl = 'http://91.206.179.119:8080';
     bot.setWebhook(webhookUrl).catch((error) => {
