@@ -1,6 +1,7 @@
 const ViberBot = require("viber-bot").Bot,
   BotEvents = require("viber-bot").Events,
   TextMessage = require("viber-bot").Message.Text,
+  KeyboardMessage = require('viber-bot').Message.Keyboard;
   express = require("express");
   require("dotenv").config();
   const bodyParser = require('body-parser');
