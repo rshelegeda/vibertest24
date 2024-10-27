@@ -17,8 +17,9 @@ if (!process.env.BOT_TOKEN) {
 if (!process.env.EXPOSE_URL) {
   console.log("Could not find exposing url");
   return;
-}
-const {phoneNumberButton, keyboard} = require('./keyboards');
+};
+
+// const {phoneNumberButton, keyboard} = require('./keyboards');
 
 const bot = new ViberBot({
   authToken: process.env.BOT_TOKEN,
