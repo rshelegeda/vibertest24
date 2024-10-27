@@ -115,18 +115,6 @@ bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
 bot.on(BotEvents.MESSAGE_SENT, (message, userProfile) => console.log(message, userProfile));
 
 
-const http = require('http');
-const port = process.env.PORT || 8080;
-
-return ngrok.getPublicUrl().then(publicUrl => {
-    console.log('Set the new webhook to"', publicUrl);
-    http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(publicUrl));
-}).catch(error => {
-    console.log('Can not connect to ngrok server. Is it running?');
-    console.error(error);
-});
-
-
 // bot.on(BotEvents.SUBSCRIBED, (response) => {
 //   response.send(
 //     new TextMessage(
