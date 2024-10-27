@@ -40,6 +40,92 @@ bot.on(BotEvents.CONVERSATION_STARTED, (response) => {
     
 });
 
+bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
+    const roomname = response.userProfile.id;
+    const username = response.userProfile.name;
+    const profile_pic = response.userProfile.avatar;
+    const country_origin = response.userProfile.country;
+    const language_origin = response.userProfile.language;
+
+    console.log(roomname, username, profile_pic, country_origin, language_origin);
+
+    const text = message.text;    
+
+    if (message.contactPhoneNumber){
+        const sendPhoneNumber = async () => {
+            try {
+                const messageWithPhoneNumber = new TextMessage('Здравствуйте, ' + username + '. Вас приветствует РЕУ-8. Ваш номер ' + message.contactPhoneNumber, keyboard);
+                // Ваш асинхронный код здесь
+                await response.send(messageWithPhoneNumber); // Пример асинхронного вызова
+            } catch (error) {
+                console.error('Ошибка при отправке сообщения:', error);
+            }
+        };
+        return sendPhoneNumber();        
+    }
+
+    // console.log(roomname, username, profile_pic, country_origin, language_origin, " ", text);
+
+    if (text.toLowerCase() === 'реу') {
+        // Если пользователь выбрал "Да"
+        const messageWithKeyboard = new TextMessage('Вы выбрали Информация о РЕУ', keyboard);
+        response.send(messageWithKeyboard);
+    }
+
+    else if (text.toLowerCase() === 'квартира') {
+        // Если пользователь выбрал "Да"
+        const messageWithKeyboard = new TextMessage('Вы выбрали Информация о квартире', keyboard);
+        response.send(messageWithKeyboard);
+    }
+
+    else if (text.toLowerCase() === 'оплата') {
+        // Если пользователь выбрал "Да"
+        const messageWithKeyboard = new TextMessage('Вы выбрали Оплату счетов', keyboard);
+        response.send(messageWithKeyboard);
+    }
+
+    else if (text.toLowerCase() === 'телефон') {
+
+
+        const keyboardPhone = {
+            "Type": "keyboard",
+            "Buttons": [phoneNumberButton]
+        };
+
+        const sendButton = async () => {
+            try {
+                const messageWithKeyboard = new TextMessage('Нажмите кнопку для передачи номера телефона', keyboardPhone);
+                // Ваш асинхронный код здесь
+                await response.send(messageWithKeyboard); // Пример асинхронного вызова
+            } catch (error) {
+                console.error('Ошибка при отправке сообщения:', error);
+            }
+        };
+        sendButton();
+
+    }
+
+    else {
+        bot.getBotProfile().then(response => console.log(`Bot Named: ${response.name}`));
+        const messageWithKeyboard = new TextMessage('Нажмите одну из предложенных кнопок (Если Вы не видите кнопки, нажмите значек Клавиатуры в нижнем правом углу).', keyboard);
+        response.send(messageWithKeyboard);
+    }
+});
+
+bot.on(BotEvents.MESSAGE_SENT, (message, userProfile) => console.log(message, userProfile));
+
+
+const http = require('http');
+const port = process.env.PORT || 8080;
+
+return ngrok.getPublicUrl().then(publicUrl => {
+    console.log('Set the new webhook to"', publicUrl);
+    http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(publicUrl));
+}).catch(error => {
+    console.log('Can not connect to ngrok server. Is it running?');
+    console.error(error);
+});
+
 
 // bot.on(BotEvents.SUBSCRIBED, (response) => {
 //   response.send(
