@@ -123,9 +123,9 @@ bot.on(BotEvents.MESSAGE_SENT, (message, userProfile) => console.log(message, us
 //   );
 // });
 
-bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
-  response.send(new TextMessage(`Message received.`));
-});
+// bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
+//   response.send(new TextMessage(`Message received.`));
+// });
 
 app.get("/", (req, res) => {
   res.send("Using global content security policy!");
