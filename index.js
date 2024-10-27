@@ -7,6 +7,7 @@ const ViberBot = require("viber-bot").Bot,
   const bodyParser = require('body-parser');
 
 const app = express();
+const {phoneNumberButton, keyboard} = require('./keyboards')
 
 if (!process.env.BOT_TOKEN) {
   console.log("Could not find bot account token key.");
