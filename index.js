@@ -1,9 +1,11 @@
 const ViberBot = require("viber-bot").Bot,
   BotEvents = require("viber-bot").Events,
   TextMessage = require("viber-bot").Message.Text,
+  KeyboardMessage = require('viber-bot').Message.Keyboard;
   express = require("express");
-  require("dotenv").config();
-  const bodyParser = require('body-parser');
+
+require("dotenv").config();
+const bodyParser = require("body-parser");
 
 const app = express();
 app.use(express.json());
@@ -11,32 +13,43 @@ app.use(express.json());
 if (!process.env.BOT_TOKEN) {
   console.log("Could not find bot account token key.");
   return;
-};
+}
 if (!process.env.EXPOSE_URL) {
   console.log("Could not find exposing url");
   return;
-};
-
+}
 const {phoneNumberButton, keyboard} = require('./keyboards');
 
-
-
-
 const bot = new ViberBot({
-    authToken: process.env.BOT_TOKEN,
-    name: 'РЕУ-8 БОТ',
-    avatar: process.env.BOT_LOGO    
+  authToken: process.env.BOT_TOKEN,
+  name: "РЕУ-8 БОТ",
+  avatar: process.env.BOT_LOGO,
+});
+
+// bot.on(BotEvents.SUBSCRIBED, (response) => {
+//   response.send(
+//     new TextMessage(
+//       `Hi there ${response.userProfile.name}. I am ${bot.name}! Feel free to ask me anything.`
+//     )
+//   );
+// });
+
+bot.on(BotEvents.CONVERSATION_STARTED, (response) => {
+    response.send(new KeyboardMessage({"Type": "keyboard",
+    "Buttons": [
+       {
+        "Columns": 6,
+        "Rows": 1,
+        "BgColor": "#2db9b9",
+        "Text": "НАЧАТЬ ДИАЛОГ И ПОДЕЛИТЬСЯ НОМЕРОМ",
+        "ActionType": "share-phone",
+        "ActionBody": "phone",
+    }
+    ]}, [], null, null, 3));
+    
 });
 
 
-
-bot.on(BotEvents.SUBSCRIBED, (response) => {
-  response.send(
-    new TextMessage(
-      `Hi there ${response.userProfile.name}. I am ${bot.name}! Feel free to ask me anything.`
-    )
-  );
-});
 
 bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
   response.send(new TextMessage(`Message received.`));
