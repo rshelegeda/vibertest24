@@ -20,9 +20,6 @@ if (!process.env.EXPOSE_URL) {
 
 const {phoneNumberButton, keyboard} = require('./keyboards');
 
-
-
-
 const bot = new ViberBot({
     authToken: process.env.BOT_TOKEN,
     name: 'РЕУ-8 БОТ',
