@@ -26,28 +26,28 @@ const bot = new ViberBot({
   avatar: process.env.BOT_LOGO,
 });
 
-// bot.on(BotEvents.SUBSCRIBED, (response) => {
-//   response.send(
-//     new TextMessage(
-//       `Hi there ${response.userProfile.name}. I am ${bot.name}! Feel free to ask me anything.`
-//     )
-//   );
-// });
-
-bot.on(BotEvents.CONVERSATION_STARTED, (response) => {
-    response.send(new KeyboardMessage({"Type": "keyboard",
-    "Buttons": [
-       {
-        "Columns": 6,
-        "Rows": 1,
-        "BgColor": "#2db9b9",
-        "Text": "НАЧАТЬ ДИАЛОГ И ПОДЕЛИТЬСЯ НОМЕРОМ",
-        "ActionType": "share-phone",
-        "ActionBody": "phone",
-    }
-    ]}, [], null, null, 3));
-    
+bot.on(BotEvents.SUBSCRIBED, (response) => {
+  response.send(
+    new TextMessage(
+      `Hi there ${response.userProfile.name}. I am ${bot.name}! Feel free to ask me anything.`
+    )
+  );
 });
+
+// bot.on(BotEvents.CONVERSATION_STARTED, (response) => {
+//     response.send(new KeyboardMessage({"Type": "keyboard",
+//     "Buttons": [
+//        {
+//         "Columns": 6,
+//         "Rows": 1,
+//         "BgColor": "#2db9b9",
+//         "Text": "НАЧАТЬ ДИАЛОГ И ПОДЕЛИТЬСЯ НОМЕРОМ",
+//         "ActionType": "share-phone",
+//         "ActionBody": "phone",
+//     }
+//     ]}, [], null, null, 3));
+    
+// });
 
 
 
